@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
        public float jumpPower;
        public bool isGrounded;
        public Respawn respawn;
+       public Animator animator;
    
        //public int score;
        //public TextMeshProUGUI scoreText;
@@ -19,6 +20,7 @@ public class PlayerController : MonoBehaviour
        private void Start()
        {
           rb = GetComponent<Rigidbody2D>();
+          animator = GetComponent<Animator>();
           DontDestroyOnLoad(gameObject);
        }
        
@@ -53,16 +55,24 @@ public class PlayerController : MonoBehaviour
        private void Movement()
        {
           xvalue = Input.GetAxis("Horizontal");
+          if (xvalue != 0 && isGrounded)
+          {
+             animator.SetBool("Run", true);
+          }
+          else
+          {
+             animator.SetBool("Run", false);
+          }
           Vector2 direction = new Vector2(xvalue, 0);
           if (xvalue < 0)
           {
              //transform.rotation = new Quaternion(0, 180, 0, 0);
-             transform.localScale = new Vector3(-1, 1, 1);
+             transform.localScale = new Vector3(-2, 2, 2);
           }
           else
           {
              //transform.rotation = new Quaternion(0, 0, 0, 0);
-             transform.localScale = new Vector3(1, 1, 1);
+             transform.localScale = new Vector3(2, 2, 2);
           }
           transform.Translate(direction * Time.deltaTime * speed);
        }
