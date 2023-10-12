@@ -1,9 +1,44 @@
+//#define  OLD_CODE
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager Instance;
+    public CameraFollow camera;
+    public CameraShake bossCamera;
+    public GameObject boss;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+
+    public void StartBossFight()
+    {
+        boss.SetActive(true);
+    }
+
+    public void SwitchCamera(GameObject obj, float duration)
+    {
+        camera.gameObject.SetActive(false);
+        obj.SetActive(true);
+        StartCoroutine(Delay());
+        IEnumerator Delay()
+        {
+            yield return new WaitForSeconds(duration);
+            camera.gameObject.SetActive(true);
+            obj.SetActive(false);
+        }
+    }
+
+    #region OLD CODE
+
+
+#if OLD_CODE
     [SerializeField] private GameObject playerPrefabs;
     [SerializeField] private Transform spawnPoint;
     [SerializeField] private int currentCheckpoint;
@@ -15,7 +50,8 @@ public class GameManager : MonoBehaviour
     {
         if (player == null)
         {
-            player = Instantiate(playerPrefabs, checkPoints[currentCheckpoint].transform.position, checkPoints[currentCheckpoint].transform.rotation);   
+            player =
+ Instantiate(playerPrefabs, checkPoints[currentCheckpoint].transform.position, checkPoints[currentCheckpoint].transform.rotation);   
         }
         else
         {
@@ -48,4 +84,7 @@ public class GameManager : MonoBehaviour
         currentCheckpoint = Random.Range(0, 2);
         SpawnPlayer();
     }
+#endif
+
+    #endregion
 }

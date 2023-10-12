@@ -10,7 +10,7 @@ public class Speed : PowerUp
         if (other.CompareTag("Player"))
         {
             var player = other.GetComponent<PlayerManager>();
-            player.playerController.speed = moveSpeed;
+            //player.playerController.speed = moveSpeed;
             GetComponent<Collider2D>().enabled = false;
             GetComponent<Animator>().SetTrigger("PowerUp");
             //Invoke(nameof(DestroyObject), 1);

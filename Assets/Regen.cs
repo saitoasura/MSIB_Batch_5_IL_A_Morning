@@ -10,7 +10,7 @@ public class Regen : PowerUp
       if (other.CompareTag("Player"))
       {
          var player = other.GetComponent<PlayerManager>();
-         player.Health += regenHealth;
+         //player.Health += regenHealth;
          GetComponent<Collider2D>().enabled = false;
          GetComponent<Animator>().SetTrigger("PowerUp");
          //Invoke(nameof(DestroyObject), 1);

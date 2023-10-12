@@ -13,7 +13,7 @@ public class FinishTrigger : MonoBehaviour
         {
             if (!isLoaded)
             {
-                LoadLevel("Level 2");
+                LoadLevel("FINISH");
             }
             //Debug.Log("PLAYER SAMPAI FINISH");
         }
