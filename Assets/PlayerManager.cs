@@ -14,6 +14,8 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private float attackRange;
     [SerializeField] private LayerMask enemyLayer;
     [SerializeField] private Transform attackPoint;
+    [SerializeField] private float attackDelay = 0.5f;
+    [SerializeField] private bool canAttack = true;
 
     #region Unity Region
     private void Start()
@@ -28,7 +30,7 @@ public class PlayerManager : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetMouseButtonDown(0)) 
+        if(Input.GetMouseButtonDown(0) && canAttack) 
         {
             Attack();
         }
@@ -72,6 +74,13 @@ public class PlayerManager : MonoBehaviour
 
     private void Attack()
     {
+        StartCoroutine(DelayAttack());
+        IEnumerator DelayAttack()
+        {
+            canAttack = false;
+            yield return new WaitForSeconds(attackDelay);
+            canAttack = true;
+        }
         animator.SetTrigger("Attack");
         Vector2 direction;
         Debug.Log((transform.localScale.x));
