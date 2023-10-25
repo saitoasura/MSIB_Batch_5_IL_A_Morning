@@ -8,6 +8,6 @@ public class DestroyObject : MonoBehaviour
   [SerializeField] private float destroyTime;
   private void Start()
   {
-    Destroy(gameObject, destroyTime);
+    //Destroy(gameObject, destroyTime);
   }
 }
